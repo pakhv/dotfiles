@@ -256,10 +256,6 @@ require('gitsigns').setup {
   yadm = {
     enable = false
   },
-  --on_attach = function(bufnr)
-  --  local gs = package.loaded.gitsigns
-  --  vim.key.map('n', '<leader>tb', gs.toggle_current_line_blame, { bufnr = bufnr, desc = '[T]oggle current line [B]lame' })
-  --end,
   on_attach = function(bufnr)
     vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk, { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
     vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk, { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
@@ -276,16 +272,6 @@ require("toggleterm").setup{
   start_in_insert = true,
   open_mapping = [[<c-\>]]
 }
-
---function _G.set_terminal_keymaps()
---  local opts = {buffer = 0}
---  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
---  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
---  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
--- end
-
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
---vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 local Terminal  = require('toggleterm.terminal').Terminal
 local lazygit = Terminal:new({ cmd = "lazygit", direction = 'float' })
@@ -305,7 +291,6 @@ dap.adapters.coreclr = {
   args = {'--interpreter=vscode'},
 }
 
---require('dap.ext.vscode').load_launchjs('.vscode/launch.json', { coreclr = {'cs'} })
 dap.configurations.cs = {
   {
     type = "coreclr",
@@ -323,13 +308,6 @@ dap.configurations.cs = {
   }
 }
 
---local continue = function()
---  if vim.fn.filereadable('./.vscode/launch.json') then
---    require('dap.ext.vscode').load_launchjs((vim.fn.getcwd() .. '/.vscode/launch.json'), { coreclr = {'cs'} })
---  end
---  require('dap').continue()
---end
-
 vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
 vim.keymap.set('n', '<F1>', dap.step_into, { desc = 'Debug: Step Into' })
 vim.keymap.set('n', '<F2>', dap.step_over, { desc = 'Debug: Step Over' })
@@ -338,10 +316,6 @@ vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Debug: Toggle 
 vim.keymap.set('n', '<leader>B', function()
   dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
 end, { desc = 'Debug: Set Breakpoint' })
---vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
---vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
---vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
---vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
 
 local dapui = require 'dapui'
 -- Dap UI setup
