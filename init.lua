@@ -576,6 +576,54 @@ dap.configurations.cs = {
   }
 }
 
+vim.api.nvim_create_user_command("DebugDotnetTests", function (args)
+  local current_win = vim.api.nvim_get_current_win()
+
+  local command = "export VSTEST_HOST_DEBUG=1 && dotnet test"
+  local filter_args = args['args']
+
+  if (filter_args and filter_args ~= '') then
+    command = command .. " --filter " .. args['args']
+  end
+
+  local process_is_ready = false
+  local pid_pattern = "Process Id: (%d+), Name: dotnet"
+
+  local debug_dotnet_tests = Terminal:new({
+    cmd = command,
+    close_on_exit = false,
+    direction = 'horizontal',
+    auto_scroll = true,
+    on_create = function (_)
+      vim.cmd('stopinsert')
+      vim.api.nvim_set_current_win(current_win)
+    end,
+    on_stdout = function(_, _, data, _)
+      if (process_is_ready) then
+        return
+      end
+
+      for _, str in ipairs(data) do
+        local _, _, pid = str:find(pid_pattern)
+
+        if (pid) then
+
+          process_is_ready = true
+
+          dap.run({
+            name = "tmp_attach_to_tests",
+            type = "coreclr",
+            request = "attach",
+            processId = pid
+          }, {})
+        end
+      end
+    end
+  })
+
+  debug_dotnet_tests:toggle()
+end, {})
+
 vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
 vim.keymap.set('n', '<F1>', dap.step_into, { desc = 'Debug: Step Into' })
 vim.keymap.set('n', '<F2>', dap.step_over, { desc = 'Debug: Step Over' })
@@ -647,9 +695,9 @@ vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session resu
 vim.keymap.set('n', '<F8>', function() dapui.toggle({ reset = true }) end, { desc = 'Debug: See last session result.' })
 vim.keymap.set('n', '<leader>de', dapui.eval, { desc = 'Debug: Eval expression' })
 
-dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-dap.listeners.before.event_exited['dapui_config'] = dapui.close
+--dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+--dap.listeners.before.event_terminated['dapui_config'] = dapui.close
+--dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
