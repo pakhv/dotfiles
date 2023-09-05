@@ -324,31 +324,6 @@ require("nvim-tree").setup {
         diagnostics = true,
         modified = true,
       },
-      --[[glyphs = {
-        default = "",
-        symlink = "",
-        bookmark = "󰆤",
-        modified = "●",
-        folder = {
-          arrow_closed = "",
-          arrow_open = "",
-          default = "",
-          open = "",
-          empty = "",
-          empty_open = "",
-          symlink = "",
-          symlink_open = "",
-        },
-        git = {
-          unstaged = "✗",
-          staged = "✓",
-          unmerged = "",
-          renamed = "➜",
-          untracked = "★",
-          deleted = "",
-          ignored = "◌",
-        },
-      },]]
     },
   },
   hijack_directories = {
@@ -576,54 +551,6 @@ dap.configurations.cs = {
   }
 }
 
-vim.api.nvim_create_user_command("DebugDotnetTests", function (args)
-  local current_win = vim.api.nvim_get_current_win()
-
-  local command = "export VSTEST_HOST_DEBUG=1 && dotnet test"
-  local filter_args = args['args']
-
-  if (filter_args and filter_args ~= '') then
-    command = command .. " --filter " .. args['args']
-  end
-
-  local process_is_ready = false
-  local pid_pattern = "Process Id: (%d+), Name: dotnet"
-
-  local debug_dotnet_tests = Terminal:new({
-    cmd = command,
-    close_on_exit = false,
-    direction = 'horizontal',
-    auto_scroll = true,
-    on_create = function (_)
-      vim.cmd('stopinsert')
-      vim.api.nvim_set_current_win(current_win)
-    end,
-    on_stdout = function(_, _, data, _)
-      if (process_is_ready) then
-        return
-      end
-
-      for _, str in ipairs(data) do
-        local _, _, pid = str:find(pid_pattern)
-
-        if (pid) then
-
-          process_is_ready = true
-
-          dap.run({
-            name = "tmp_attach_to_tests",
-            type = "coreclr",
-            request = "attach",
-            processId = pid
-          }, {})
-        end
-      end
-    end
-  })
-
-  debug_dotnet_tests:toggle()
-end, {})
-
 vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
 vim.keymap.set('n', '<F1>', dap.step_into, { desc = 'Debug: Step Into' })
 vim.keymap.set('n', '<F2>', dap.step_over, { desc = 'Debug: Step Over' })
@@ -813,7 +740,7 @@ require('nvim-treesitter.configs').setup {
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>td', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- [[ Configure LSP ]]
@@ -874,7 +801,7 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
-  -- tsserver = {},
+  tsserver = { },
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
@@ -981,5 +908,6 @@ cmp.setup {
   },
 }
 
+require('config.dotnet-tests')
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
