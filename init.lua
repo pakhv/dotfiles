@@ -229,6 +229,9 @@ vim.keymap.set('n', 'H', ":tabprevious<cr>")
 vim.keymap.set('n', 'L', ":tabnext<cr>")
 vim.keymap.set('n', '<leader>p', ":Explore<cr>")
 
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+
 
 -- Project Tree
 require("nvim-tree").setup {
