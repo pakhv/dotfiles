@@ -1,15 +1,16 @@
 local dap      = require('dap')
 local Terminal = require('toggleterm.terminal').Terminal
 
-local function debug_dotnet_tests(filter_args)
-  local command = "export VSTEST_HOST_DEBUG=1 && dotnet test"
+local function debug_dotnet_tests(project_path, filter_args)
+  local command = 'export VSTEST_HOST_DEBUG=1 && dotnet test'
+  command = command .. ' ' .. project_path
 
   if (filter_args and filter_args ~= '') then
-    command = command .. " --filter " .. filter_args
+    command = command .. ' --filter ' .. filter_args
   end
 
   local process_is_ready = false
-  local pid_pattern = "Process Id: (%d+), Name: dotnet"
+  local pid_pattern = 'Process Id: (%d+), Name: dotnet'
   local current_win = vim.api.nvim_get_current_win()
 
   local term = Terminal:new({
@@ -46,8 +47,9 @@ local function debug_dotnet_tests(filter_args)
   term:toggle()
 end
 
-local function run_dotnet_tests(filter_args)
+local function run_dotnet_tests(project_path, filter_args)
   local command = 'dotnet test'
+  command = command .. ' ' .. project_path
 
   if (filter_args and filter_args ~= '') then
     command = command .. " --filter " .. filter_args
@@ -127,7 +129,39 @@ local function get_dotnet_tests_filter()
   return resultFilter
 end
 
-vim.api.nvim_create_user_command("TSTest", function(_)
+local function get_parent_directory(path)
+    local last_index, _ = path:find('/[^/]*$')
+
+    return path:sub(1, last_index - 1)
+end
+
+local function get_dotnet_project_path()
+  local dir = get_parent_directory(vim.fn.expand('%:p'))
+
+  while dir ~= '' do
+    local cwdContent = vim.split(vim.fn.glob(dir .. '/*'), '\n', { trimempty = true })
+
+    for _, path in ipairs(cwdContent) do
+      if (path:find("/[^/]+.csproj")) then
+        print('Project file located in ' .. path)
+        return dir
+      end
+    end
+
+    dir = get_parent_directory(dir)
+  end
+
+  return dir
+end
+
+vim.api.nvim_create_user_command("RunDotnetTests", function(_)
+  local project_path = get_dotnet_project_path()
+
+  if (project_path == nil or project_path == '') then
+    print('Couldn\'t find project file')
+    return
+  end
+
   local filter_args = get_dotnet_tests_filter()
 
   if (filter_args and filter_args ~= '') then
@@ -153,8 +187,8 @@ vim.api.nvim_create_user_command("TSTest", function(_)
   end
 
   if (user_choice == '2' or user_choice == '4') then
-    debug_dotnet_tests(filter_args)
+    debug_dotnet_tests(project_path, filter_args)
   else
-    run_dotnet_tests(filter_args)
+    run_dotnet_tests(project_path, filter_args)
   end
 end, {})

@@ -8,6 +8,7 @@ vim.opt.termguicolors = true
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.wo.relativenumber = true
+vim.opt.backup = false
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
