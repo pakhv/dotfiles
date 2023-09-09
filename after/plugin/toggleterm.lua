@@ -1,5 +1,5 @@
 require("toggleterm").setup{
-  shell = 'bash',
+  shell = 'zsh',
   direction = 'horizontal',
   hidden = true,
   auto_scroll = true,
