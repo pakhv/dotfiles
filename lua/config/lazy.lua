@@ -18,12 +18,12 @@ require('lazy').setup({
   -- omnisharp go to definition fix
   'Hoffs/omnisharp-extended-lsp.nvim',
 
-  {
-    'nvim-tree/nvim-tree.lua',
-    dependencies = {
-      'nvim-tree/nvim-web-devicons',
-    }
-  },
+  --{
+  --  'nvim-tree/nvim-tree.lua',
+  --  dependencies = {
+  --    'nvim-tree/nvim-web-devicons',
+  --  }
+  --},
 
   -- fancy terminal
   {'akinsho/toggleterm.nvim', version = "*", config = true},
@@ -77,7 +77,6 @@ require('lazy').setup({
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
   {
-    -- Theme inspired by Atom
     'catppuccin/nvim',
     priority = 1000,
     config = function()
