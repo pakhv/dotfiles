@@ -4,6 +4,7 @@ local opts = { noremap = true, silent = true }
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', opts)
+vim.keymap.set('i', 'jk', '<ESC>')
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -11,7 +12,6 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 
 vim.keymap.set('n', 'H', ":tabprevious<cr>", opts)
 vim.keymap.set('n', 'L', ":tabnext<cr>", opts)
-vim.keymap.set('n', '<leader>p', ":Explore<cr>", opts)
 
 vim.keymap.set('n', '<C-d>', '<C-d>zz', opts)
 vim.keymap.set('n', '<C-u>', '<C-u>zz', opts)

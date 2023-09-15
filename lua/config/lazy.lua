@@ -141,4 +141,5 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
+  'ThePrimeagen/harpoon'
 }, {})
