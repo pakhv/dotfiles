@@ -57,7 +57,7 @@ local function run_dotnet_tests(project_path, filter_args)
 
   local term = Terminal:new({
     cmd = command,
-    direction = 'horizontal',
+    direction = 'float',
     auto_scroll = true,
     close_on_exit = false
   })
@@ -105,14 +105,14 @@ local function get_dotnet_tests_filter()
 
   local parts = {}
   for match in (status or ''):gmatch('([^->]+)') do
-    match, _ = match:gsub('^%s*(.-)%s*$', '%1')
-    table.insert(parts, match)
+    local sub_str, _ = match:gsub('^%s*(.-)%s*$', '%1')
+    table.insert(parts, sub_str)
   end
 
   local namespaceLine, classLine, _ = unpack(parts)
 
-  local _, _, namespace = (namespaceLine or ''):find("namespace ([%a%.]+)")
-  local _, _, class = (classLine or ''):find("%a class (%a+)")
+  local _, _, namespace = (namespaceLine or ''):find("namespace (%w+)")
+  local _, _, class = (classLine or ''):find("%a class (%w+)")
 
   if (namespace == nil or class == nil) then
     return
