@@ -55,8 +55,7 @@ local servers = {
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
-  -- rust_analyzer = {},
-  tsserver = { },
+  rust_analyzer = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
@@ -65,19 +64,6 @@ local servers = {
       telemetry = { enable = false },
     },
   },
-  omnisharp = {
-    cmd = { "dotnet", "omnisharp" },
-    enable_roslyn_analyzers = true,
-    enable_import_completion = true
-  }
-}
-
-local handlers = {
-  omnisharp = {
-    handlers = {
-      ["textDocument/definition"] = require('omnisharp_extended').handler
-    },
-  }
 }
 
 -- Setup neovim lua configuration
@@ -101,7 +87,6 @@ mason_lspconfig.setup_handlers {
       on_attach = on_attach,
       settings = servers[server_name],
       filetypes = (servers[server_name] or {}).filetypes,
-      handlers = (handlers[server_name] or {}).handlers
     }
   end
 }

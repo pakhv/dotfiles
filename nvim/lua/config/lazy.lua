@@ -15,8 +15,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  -- omnisharp go to definition fix
-  'Hoffs/omnisharp-extended-lsp.nvim',
 
   --{
   --  'nvim-tree/nvim-tree.lua',
