@@ -1,6 +1,5 @@
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#50493e,bold"
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-export FZF_COMPLETION_OPTS='--border --info=inline'
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
 export ASPNETCORE_ENVIRONMENT="Development"
@@ -30,3 +29,8 @@ alias vim="nvim"
 
 alias la="ls -a"
 . "$HOME/.cargo/env"
+
+# fuzzy cd
+function fcd() { 
+    cd $(find $1 -path "./proc/*" -prune -o -path "/proc/*" -prune -o -type d | fzf); 
+};
