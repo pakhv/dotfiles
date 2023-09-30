@@ -28,6 +28,7 @@ alias ggs="git log --graph --shortstat"
 alias la="ls -a"
 
 alias vim="nvim"
+alias tmux="tmux -u"
 
 # fuzzy cd
 function fcd() { 
