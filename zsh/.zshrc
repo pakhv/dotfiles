@@ -1,7 +1,6 @@
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#50493e,bold"
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-FZF_COMPLETION_OPTS='--border --info=inline'
-FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#50493e,bold"
+export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
 export ASPNETCORE_ENVIRONMENT="Development"
 
@@ -27,3 +26,8 @@ alias ggo="git log --graph --oneline"
 alias ggs="git log --graph --shortstat"
 
 alias la="ls -a"
+
+# fuzzy cd
+function fcd() { 
+    cd $(find $1 -path "./proc/*" -prune -o -path "/proc/*" -prune -o -type d | fzf); 
+};
