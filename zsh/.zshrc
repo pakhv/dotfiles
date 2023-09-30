@@ -27,6 +27,8 @@ alias ggs="git log --graph --shortstat"
 
 alias la="ls -a"
 
+alias vim="nvim"
+
 # fuzzy cd
 function fcd() { 
     cd $(find $1 -path "./proc/*" -prune -o -path "/proc/*" -prune -o -type d | fzf); 
