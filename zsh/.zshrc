@@ -30,6 +30,9 @@ alias vim="nvim"
 alias la="ls -a"
 . "$HOME/.cargo/env"
 
+alias vim="nvim"
+alias tmux="tmux -u"
+
 # fuzzy cd
 function fcd() { 
     cd $(find $1 -path "./proc/*" -prune -o -path "/proc/*" -prune -o -type d | fzf); 
