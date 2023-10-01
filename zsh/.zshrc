@@ -30,7 +30,7 @@ alias la="ls -a"
 alias vim="nvim"
 alias tmux="tmux -u"
 
-# fuzzy cd
-function fcd() { 
-    cd $(find $1 -path "./proc/*" -prune -o -path "/proc/*" -prune -o -type d | fzf); 
-};
+fpath=( ~/.local/scripts $fpath )
+autoload fcd
+autoload fd
+autoload t

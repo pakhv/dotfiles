@@ -1,0 +1,7 @@
+function fcd() { 
+    search_result=$(find $1 -path "./proc/*" -prune -o -path "/proc/*" -prune -o -type d | fzf)
+    
+    if [[ ! -z $search_result ]] then
+        cd $search_result 
+    fi
+};
