@@ -3,6 +3,7 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
 export ASPNETCORE_ENVIRONMENT="Development"
+export PATH="$PATH:/root/.dotnet/tools"
 
 function parse_git_branch() {
     git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/[\1]/p'
@@ -24,11 +25,14 @@ autoload -Uz compinit && compinit
 # aliases
 alias ggo="git log --graph --oneline"
 alias ggs="git log --graph --shortstat"
+alias gs="git status"
 
 alias la="ls -a"
 
 alias vim="nvim"
 alias tmux="tmux -u"
+
+alias c="clear"
 
 fpath=( ~/.local/scripts $fpath )
 autoload fcd
