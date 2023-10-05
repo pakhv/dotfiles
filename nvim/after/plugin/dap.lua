@@ -4,7 +4,7 @@ local dap = require('dap')
 dap.adapters.coreclr = {
   type = 'executable',
   command = '/usr/local/bin/netcoredbg',
-  args = {'--interpreter=vscode'},
+  args = { '--interpreter=vscode' },
 }
 
 dap.configurations.cs = {
@@ -16,10 +16,25 @@ dap.configurations.cs = {
   },
   {
     type = "coreclr",
+    name = "Launch BP",
+    request = "launch",
+    program =
+    "/workspaces/dev-environment/api-building-projects/src/BuildingProjects.Api/bin/Debug/net7.0/BuildingProjects.Api.dll"
+  },
+  {
+    type = "coreclr",
     name = "Attach Ne",
     request = "attach",
-    processId = function ()
+    processId = function()
       return vim.fn.system { 'pidof', 'NetworkElements.Api' }
+    end
+  },
+  {
+    type = "coreclr",
+    name = "Attach BT",
+    request = "attach",
+    processId = function()
+      return vim.fn.system { 'pidof', 'BuildingProjects.Api' }
     end
   }
 }
@@ -35,7 +50,7 @@ end, { desc = 'Debug: Set Breakpoint' })
 
 local dapui = require 'dapui'
 -- Dap UI setup
-    -- For more information, see |:help nvim-dap-ui|
+-- For more information, see |:help nvim-dap-ui|
 dapui.setup {
   -- Set icons to characters that are more likely to work in every terminal.
   --    Feel free to remove or use ones that you like more! :)
@@ -57,7 +72,7 @@ dapui.setup {
   layouts = {
     {
       elements = {
-      -- Elements can be strings or table with id and size keys.
+        -- Elements can be strings or table with id and size keys.
         { id = "scopes", size = 0.25 },
         "breakpoints",
         "stacks",
@@ -76,8 +91,8 @@ dapui.setup {
     },
   },
   floating = {
-    max_height = nil, -- These can be integers or a float between 0 and 1.
-    max_width = nil, -- Floats will be treated as percentage of your screen.
+    max_height = nil,  -- These can be integers or a float between 0 and 1.
+    max_width = nil,   -- Floats will be treated as percentage of your screen.
     border = "single", -- Border style. Can be "single", "double" or "rounded"
     mappings = {
       close = { "q", "<Esc>" },

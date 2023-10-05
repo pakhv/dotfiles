@@ -28,11 +28,11 @@ vim.keymap.set("n", "<C-Down>", ":resize +2<CR>", opts)
 vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
-vim.keymap.set("n", "<leader>e", ":Lex 15<cr>", opts)
+vim.keymap.set("n", "<leader>e", ":Ex<cr>", opts)
 
 -- Stay in indent mode
 vim.keymap.set("v", "<", "<gv", opts)
 vim.keymap.set("v", ">", ">gv", opts)
 
--- Better replace 
+-- Better replace
 vim.keymap.set("v", "p", '"_dP', opts)
