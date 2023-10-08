@@ -24,6 +24,7 @@ autoload -Uz compinit && compinit
 # aliases
 alias ggo="git log --graph --oneline"
 alias ggs="git log --graph --shortstat"
+alias gs="git status"
 
 alias vim="nvim"
 
@@ -32,6 +33,8 @@ alias la="ls -a"
 
 alias vim="nvim"
 alias tmux="tmux -u"
+
+alias c="clear"
 
 # fuzzy cd
 function fcd() { 
