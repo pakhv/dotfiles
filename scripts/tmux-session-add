@@ -1,3 +1,5 @@
+#!/usr/bin/zsh
+
 function tmux-session-add()
 {
     search_result=$(find $HOME $WORKSPACE_DIR -type d | fzf)

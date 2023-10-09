@@ -1,3 +1,5 @@
+#!/usr/bin/zsh
+
 function fd() {
     fcd /workspaces/dev-environment
 }

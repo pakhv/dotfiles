@@ -1,3 +1,5 @@
+#!/usr/bin/zsh
+
 function tmux-window-add ()
 {
     if [[ -z $TMUX ]]; then
