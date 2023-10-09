@@ -4,6 +4,7 @@ export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
 export ASPNETCORE_ENVIRONMENT="Development"
 export PATH="$PATH:/root/.dotnet/tools"
+export WORKSPACE_DIR="/workspaces/dev-environment"
 
 function parse_git_branch() {
     git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/[\1]/p'
@@ -37,4 +38,5 @@ alias c="clear"
 fpath=( ~/.local/scripts $fpath )
 autoload fcd
 autoload fd
-autoload t
+autoload tmux-session-add
+autoload tmux-window-add

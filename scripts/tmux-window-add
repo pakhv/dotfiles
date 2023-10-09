@@ -1,0 +1,15 @@
+function tmux-window-add ()
+{
+    if [[ -z $TMUX ]]; then
+        echo "Not in a TMUX session"
+        return
+    fi
+
+    search_result=$(find $HOME $WORKSPACE_DIR -type d | fzf)
+
+    if [[ -z $search_result ]]; then
+        return
+    fi
+
+    tmux new-window -c $search_result
+}

@@ -1,8 +1,0 @@
-function t() {
-    if [[ ! -z $TMUX ]] then
-	echo "Already in tmux session"
-    else
-    	cd /workspaces/dev-environment
-	tmux
-    fi
-}
