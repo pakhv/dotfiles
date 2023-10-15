@@ -1,27 +1,31 @@
 -- DAP config
 local dap = require('dap')
 
-dap.adapters.coreclr = {
-  type = 'executable',
-  command = '/usr/local/bin/netcoredbg',
-  args = {'--interpreter=vscode'},
+dap.adapters.codelldb = {
+  type = 'server',
+  port = '13000',
+  executable = {
+    command = 'codelldb',
+    args = { '--port', '13000' },
+  },
+  args = {}
 }
 
-dap.configurations.cs = {
+dap.configurations.rust = {
   {
-    type = "coreclr",
-    name = "Launch Ne",
-    request = "launch",
-    program = "/workspaces/dev-environment/api-nri-ne/src/NetworkElements.Api/bin/Debug/net7.0/NetworkElements.Api.dll"
+    type = 'codelldb',
+    request = 'launch',
+    name = 'Launch Bob',
+    program = '/root/rust/bye-bob/target/debug/bye-bob',
+    showDisassembly = "never"
   },
   {
-    type = "coreclr",
-    name = "Attach Ne",
-    request = "attach",
-    processId = function ()
-      return vim.fn.system { 'pidof', 'NetworkElements.Api' }
-    end
-  }
+    type = 'codelldb',
+    request = 'attach',
+    name = 'Attach Bob',
+    program = 'bye-bob',
+    showDisassembly = "never"
+  },
 }
 
 vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
@@ -35,7 +39,7 @@ end, { desc = 'Debug: Set Breakpoint' })
 
 local dapui = require 'dapui'
 -- Dap UI setup
-    -- For more information, see |:help nvim-dap-ui|
+-- For more information, see |:help nvim-dap-ui|
 dapui.setup {
   -- Set icons to characters that are more likely to work in every terminal.
   --    Feel free to remove or use ones that you like more! :)
@@ -57,7 +61,7 @@ dapui.setup {
   layouts = {
     {
       elements = {
-      -- Elements can be strings or table with id and size keys.
+        -- Elements can be strings or table with id and size keys.
         { id = "scopes", size = 0.25 },
         "breakpoints",
         "stacks",
@@ -76,8 +80,8 @@ dapui.setup {
     },
   },
   floating = {
-    max_height = nil, -- These can be integers or a float between 0 and 1.
-    max_width = nil, -- Floats will be treated as percentage of your screen.
+    max_height = nil,  -- These can be integers or a float between 0 and 1.
+    max_width = nil,   -- Floats will be treated as percentage of your screen.
     border = "single", -- Border style. Can be "single", "double" or "rounded"
     mappings = {
       close = { "q", "<Esc>" },
