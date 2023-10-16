@@ -12,18 +12,20 @@ dap.adapters.codelldb = {
 }
 
 dap.configurations.rust = {
-  {
-    type = 'codelldb',
-    request = 'launch',
-    name = 'Launch Bob',
-    program = '/root/rust/bye-bob/target/debug/bye-bob',
-    showDisassembly = "never"
-  },
+  -- {
+  --   type = 'codelldb',
+  --   request = 'launch',
+  --   name = 'Launch',
+  --   program = '/root/rust/bye-bob/target/debug/bye-bob',
+  --   showDisassembly = "never"
+  -- },
   {
     type = 'codelldb',
     request = 'attach',
-    name = 'Attach Bob',
-    program = 'bye-bob',
+    name = 'Attach',
+    program = function()
+      return vim.fn.input({ prompt = 'Enter Process Name: ' })
+    end,
     showDisassembly = "never"
   },
 }
