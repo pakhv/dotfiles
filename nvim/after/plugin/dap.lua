@@ -12,13 +12,6 @@ dap.adapters.codelldb = {
 }
 
 dap.configurations.rust = {
-  -- {
-  --   type = 'codelldb',
-  --   request = 'launch',
-  --   name = 'Launch',
-  --   program = '/root/rust/bye-bob/target/debug/bye-bob',
-  --   showDisassembly = "never"
-  -- },
   {
     type = 'codelldb',
     request = 'attach',
@@ -104,3 +97,21 @@ vim.keymap.set('n', '<leader>de', dapui.eval, { desc = 'Debug: Eval expression' 
 --dap.listeners.after.event_initialized['dapui_config'] = dapui.open
 --dap.listeners.before.event_terminated['dapui_config'] = dapui.close
 --dap.listeners.before.event_exited['dapui_config'] = dapui.close
+
+local function get_launch_json_path()
+  local default_path = vim.fn.getcwd() .. '/'
+  local json_dir = vim.fn.input({ prompt = 'Enter launch.json directory: ', default = default_path })
+
+  if json_dir.match('.+/$', 1) ~= nil then
+    json_dir = json_dir.sub(1, json_dir.len - 1)
+  end
+
+  json_dir = json_dir .. '/launch.json'
+
+  return json_dir
+end
+
+vim.api.nvim_create_user_command("DapAddRustLaunchJsonConfiguration", function()
+  local json_dir = get_launch_json_path()
+  require('dap.ext.vscode').load_launchjs(json_dir, { codelldb = { 'rust' } })
+end, {})
