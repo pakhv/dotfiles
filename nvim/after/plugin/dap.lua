@@ -10,33 +10,12 @@ dap.adapters.coreclr = {
 dap.configurations.cs = {
   {
     type = "coreclr",
-    name = "Launch Ne",
-    request = "launch",
-    program = "/workspaces/dev-environment/api-nri-ne/src/NetworkElements.Api/bin/Debug/net7.0/NetworkElements.Api.dll"
-  },
-  {
-    type = "coreclr",
-    name = "Launch BP",
-    request = "launch",
-    program =
-    "/workspaces/dev-environment/api-building-projects/src/BuildingProjects.Api/bin/Debug/net7.0/BuildingProjects.Api.dll"
-  },
-  {
-    type = "coreclr",
-    name = "Attach Ne",
+    name = "Attach",
     request = "attach",
     processId = function()
-      return vim.fn.system { 'pidof', 'NetworkElements.Api' }
+      return vim.fn.input({ prompt = 'Enter Process Id: ' })
     end
   },
-  {
-    type = "coreclr",
-    name = "Attach BT",
-    request = "attach",
-    processId = function()
-      return vim.fn.system { 'pidof', 'BuildingProjects.Api' }
-    end
-  }
 }
 
 vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
@@ -113,3 +92,21 @@ vim.keymap.set('n', '<leader>de', dapui.eval, { desc = 'Debug: Eval expression' 
 --dap.listeners.after.event_initialized['dapui_config'] = dapui.open
 --dap.listeners.before.event_terminated['dapui_config'] = dapui.close
 --dap.listeners.before.event_exited['dapui_config'] = dapui.close
+
+local function get_launch_json_path()
+  local default_path = vim.fn.getcwd() .. '/'
+  local json_dir = vim.fn.input({ prompt = 'Enter launch.json directory: ', default = default_path })
+
+  if json_dir.match('.+/$', 1) ~= nil then
+    json_dir = json_dir.sub(1, json_dir.len - 1)
+  end
+
+  json_dir = json_dir .. '/launch.json'
+
+  return json_dir
+end
+
+vim.api.nvim_create_user_command("DapAddCSharpLaunchJsonConfiguration", function()
+  local json_dir = get_launch_json_path()
+  require('dap.ext.vscode').load_launchjs(json_dir, { coreclr = { 'cs' } })
+end, {})
