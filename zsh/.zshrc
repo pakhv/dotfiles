@@ -23,6 +23,7 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # autocompelete
 autoload -Uz compinit && compinit
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 
 # aliases
 alias ggo="git log --graph --oneline"
