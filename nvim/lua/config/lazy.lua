@@ -24,7 +24,7 @@ require('lazy').setup({
   --},
 
   -- fancy terminal
-  {'akinsho/toggleterm.nvim', version = "*", config = true},
+  { 'akinsho/toggleterm.nvim', version = "*", config = true },
 
   -- DAP
   'mfussenegger/nvim-dap',
@@ -49,7 +49,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+      { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -73,7 +73,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',    opts = {} },
   {
     'catppuccin/nvim',
     priority = 1000,
@@ -139,5 +139,6 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
-  'ThePrimeagen/harpoon'
+  'ThePrimeagen/harpoon',
+  'tpope/vim-surround'
 }, {})
