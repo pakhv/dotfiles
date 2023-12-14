@@ -36,6 +36,7 @@ alias vim="nvim"
 alias tmux="tmux -u"
 
 alias c="clear"
+alias k="kubectl"
 
 fpath=( ~/.local/scripts $fpath )
 autoload fcd
