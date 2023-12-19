@@ -13,9 +13,6 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', 'H', ":tabprevious<cr>", opts)
 vim.keymap.set('n', 'L', ":tabnext<cr>", opts)
 
-vim.keymap.set('n', '<C-d>', '<C-d>zz', opts)
-vim.keymap.set('n', '<C-u>', '<C-u>zz', opts)
-
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
@@ -36,3 +33,12 @@ vim.keymap.set("v", ">", ">gv", opts)
 
 -- Better replace
 vim.keymap.set("v", "p", '"_dP', opts)
+
+vim.keymap.set("n", "j", 'jzz', opts)
+vim.keymap.set("n", "k", 'kzz', opts)
+vim.keymap.set("v", "j", 'jzz', opts)
+vim.keymap.set("v", "k", 'kzz', opts)
+vim.keymap.set("n", "gg", 'ggzz', opts)
+vim.keymap.set("n", "G", 'Gzz', opts)
+vim.keymap.set('n', '<C-d>', '<C-d>zz', opts)
+vim.keymap.set('n', '<C-u>', '<C-u>zz', opts)
