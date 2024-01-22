@@ -7,6 +7,9 @@ export PATH="$PATH:/root/.dotnet/tools"
 export WORKSPACE_DIR="/workspaces/dev-environment"
 export LC_ALL=C.UTF-8
 
+export EDITOR='nvim'
+export VISUAL='nvim'
+
 function parse_git_branch() {
     git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/[\1]/p'
 }

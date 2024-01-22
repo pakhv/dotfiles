@@ -18,13 +18,6 @@ require('lazy').setup({
   -- omnisharp go to definition fix
   'Hoffs/omnisharp-extended-lsp.nvim',
 
-  --{
-  --  'nvim-tree/nvim-tree.lua',
-  --  dependencies = {
-  --    'nvim-tree/nvim-web-devicons',
-  --  }
-  --},
-
   -- fancy terminal
   { 'akinsho/toggleterm.nvim', version = "*", config = true },
 
@@ -80,6 +73,10 @@ require('lazy').setup({
     'catppuccin/nvim',
     priority = 1000,
     config = function()
+      require("catppuccin").setup({
+        transparent_background = true,
+      })
+
       vim.cmd.colorscheme 'catppuccin-macchiato'
     end,
   },
@@ -142,5 +139,6 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
   'ThePrimeagen/harpoon',
-  'tpope/vim-surround'
+  'tpope/vim-surround',
+  'RRethy/vim-illuminate'
 }, {})
