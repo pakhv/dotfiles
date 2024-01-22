@@ -1,6 +1,10 @@
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#50493e,bold"
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+export CHATGE_OLLAMA_HOST=host.docker.internal:11434
+export CHATGE_OLLAMA_MODEL=llama2
+export EDITOR='nvim'
+export VISUAL='nvim'
 
 export ASPNETCORE_ENVIRONMENT="Development"
 

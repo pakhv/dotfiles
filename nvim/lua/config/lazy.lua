@@ -15,17 +15,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-
-  --{
-  --  'nvim-tree/nvim-tree.lua',
-  --  dependencies = {
-  --    'nvim-tree/nvim-web-devicons',
-  --  }
-  --},
-
-  -- fancy terminal
-  { 'akinsho/toggleterm.nvim', version = "*", config = true },
-
   -- DAP
   'mfussenegger/nvim-dap',
   'rcarriga/nvim-dap-ui',
@@ -73,11 +62,15 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',    opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     'catppuccin/nvim',
     priority = 1000,
     config = function()
+      require("catppuccin").setup({
+        transparent_background = true,
+      })
+
       vim.cmd.colorscheme 'catppuccin-macchiato'
     end,
   },
@@ -101,9 +94,9 @@ require('lazy').setup({
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
+    main = "ibl",
     opts = {
-      char = '┊',
-      show_trailing_blankline_indent = false,
+      indent = { char = "╎" },
     },
   },
 
@@ -139,6 +132,8 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
+
   'ThePrimeagen/harpoon',
-  'tpope/vim-surround'
+  'tpope/vim-surround',
+  'RRethy/vim-illuminate'
 }, {})
