@@ -41,6 +41,10 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
+
+  nmap('<leader>th', function()
+    vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(0))
+  end, '[T]oggle Inlay [H]ints')
 end
 
 -- Enable the following language servers
