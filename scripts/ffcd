@@ -1,0 +1,16 @@
+#!/usr/bin/zsh
+
+function ffcd()
+{
+    search_result=$(find $@ -path "./proc/*" -prune -o -path "/proc/*" -prune -o -type f | fzf)
+
+    if [[ -z $search_result ]] then
+	return
+    fi
+
+    directory_name=$(dirname $search_result)
+
+    if [[ ! -z $directory_name ]] then
+        cd $directory_name
+    fi
+}

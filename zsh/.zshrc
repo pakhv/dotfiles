@@ -5,6 +5,7 @@ export CHATGE_OLLAMA_HOST=host.docker.internal:11434
 export CHATGE_OLLAMA_MODEL=llama2
 export EDITOR='nvim'
 export VISUAL='nvim'
+export WORKSPACE_DIR="/workspaces/rust"
 
 export ASPNETCORE_ENVIRONMENT="Development"
 
@@ -40,7 +41,13 @@ alias tmux="tmux -u"
 
 alias c="clear"
 
-# fuzzy cd
-function fcd() { 
-    cd $(find $1 -path "./proc/*" -prune -o -path "/proc/*" -prune -o -type d | fzf); 
-};
+fpath=( ~/.local/scripts $fpath )
+autoload fcd
+autoload ffcd
+autoload tmux-news-def
+autoload tmux-neww-def
+
+alias fd="fcd $WORKSPACE_DIR $HOME"
+alias ff="ffcd $WORKSPACE_DIR $HOME"
+alias tmux-news="tmux-news-def $WORKSPACE_DIR $HOME"
+alias tmux-neww="tmux-neww-def $WORKSPACE_DIR $HOME"
