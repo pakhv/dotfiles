@@ -2,7 +2,7 @@
 
 function ffcd()
 {
-    search_result=$(find $@ -path "./proc/*" -prune -o -path "/proc/*" -prune -o -type f | fzf)
+    search_result=$(find $@ -path "./proc/*" -prune -o -path "/proc/*" -prune -o -type f | fzf --preview 'cat {}')
 
     if [[ -z $search_result ]] then
 	return
