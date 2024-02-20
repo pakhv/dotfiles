@@ -1,0 +1,21 @@
+version: '3.9'
+name: postgres
+services:
+  db:
+    image: postgres:13.8
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=pguser
+      - POSTGRES_PASSWORD=Qwerty123!
+      - POSTGRES_DB=pg_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - \\wsl$$\Ubuntu\home\vladislav\pgdata:/var/lib/postgresql/data
+  dbeaver:
+    image: dbeaver/cloudbeaver:22.3.4
+    container_name: cloudbeaver
+    ports:
+      - "8090:8978"
+    volumes:
+      - \\wsl$$\Ubuntu\home\vladislav\dbeaver-data:/opt/cloudbeaver/workspace
