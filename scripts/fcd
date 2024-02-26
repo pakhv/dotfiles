@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 
 function fcd() { 
-    search_result=$(find $@ -path "./proc/*" -prune -o -path "/proc/*" -prune -o -type d | fzf)
+    search_result=$(find $@ -path "./proc/*" -prune -o -path "/proc/*" -prune -o -type d | fzf --preview 'ls -a {}')
     
     if [[ ! -z $search_result ]] then
         cd $search_result 
