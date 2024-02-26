@@ -8,6 +8,7 @@ export VISUAL='nvim'
 export WORKSPACE_DIR="/workspaces/rust"
 
 export ASPNETCORE_ENVIRONMENT="Development"
+export TERM=xterm-24bits
 
 function parse_git_branch() {
     git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/[\1]/p'
