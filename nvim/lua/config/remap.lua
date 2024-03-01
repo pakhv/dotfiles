@@ -41,8 +41,6 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz', opts)
 vim.keymap.set('n', '<C-u>', '<C-u>zz', opts)
 
 -- Quickfix list
-vim.keymap.set('n', '<leader>r', function()
-  vim.lsp.buf.references()
-end, { desc = 'add lsp references to quickfix list' })
+vim.keymap.set('n', '<leader>r', vim.lsp.buf.references, { desc = 'add lsp references to quickfix list' })
 vim.keymap.set('n', '[q', ':cprev<cr>', { desc = 'go to previous quickfix list entry' })
 vim.keymap.set('n', ']q', ':cnext<cr>', { desc = 'go to next quickfix list entry' })
