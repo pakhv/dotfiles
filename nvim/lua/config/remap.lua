@@ -31,15 +31,6 @@ vim.keymap.set("v", ">", ">gv", opts)
 -- Better replace
 vim.keymap.set("v", "p", '"_dP', opts)
 
-vim.keymap.set("n", "j", 'jzz', opts)
-vim.keymap.set("n", "k", 'kzz', opts)
-vim.keymap.set("v", "j", 'jzz', opts)
-vim.keymap.set("v", "k", 'kzz', opts)
-vim.keymap.set("n", "gg", 'ggzz', opts)
-vim.keymap.set("n", "G", 'Gzz', opts)
-vim.keymap.set('n', '<C-d>', '<C-d>zz', opts)
-vim.keymap.set('n', '<C-u>', '<C-u>zz', opts)
-
 -- Quickfix list
 vim.keymap.set('n', '<leader>r', vim.lsp.buf.references, { desc = 'add lsp references to quickfix list' })
 vim.keymap.set('n', '[q', ':cprev<cr>', { desc = 'go to previous quickfix list entry' })

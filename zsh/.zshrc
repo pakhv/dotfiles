@@ -3,11 +3,12 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 export CHATGE_OLLAMA_HOST=host.docker.internal:11434
 export CHATGE_OLLAMA_MODEL=llama2
+
+export LC_ALL=C.UTF-8
+
 export EDITOR='nvim'
 export VISUAL='nvim'
 export WORKSPACE_DIR="/workspaces/rust"
-
-export ASPNETCORE_ENVIRONMENT="Development"
 export TERM=xterm-24bits
 
 function parse_git_branch() {
@@ -31,8 +32,6 @@ autoload -Uz compinit && compinit
 alias ggo="git log --graph --oneline"
 alias ggs="git log --graph --shortstat"
 alias gs="git status"
-
-alias vim="nvim"
 
 alias la="ls -a"
 . "$HOME/.cargo/env"
