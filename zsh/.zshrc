@@ -38,6 +38,8 @@ alias la="ls -a"
 
 alias vim="nvim"
 alias tmux="tmux -u"
+alias tmux-ks="tmux kill-session -t"
+alias tmux-ls="tmux list-sessions"
 
 alias c="clear"
 
