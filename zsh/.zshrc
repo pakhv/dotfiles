@@ -36,7 +36,8 @@ alias ggo="git log --graph --oneline"
 alias ggs="git log --graph --shortstat"
 alias gs="git status"
 
-alias la="ls -a"
+alias ls="ls --color=auto"
+alias la="exa -lah --icons --no-permissions"
 
 alias vim="nvim"
 alias tmux="tmux -u"
