@@ -63,7 +63,7 @@ function App() {
         return <i class="nf nf-weather-night_alt_lightning"></i>;
     }
   }
-  
+
   return (
     <div class="app">
       <div class="left">
@@ -88,7 +88,7 @@ function App() {
       </div>
 
       <div class="center widgets-container">
-        { output.date?.formatted && <div class="date-time-container">{output.date?.formatted}</div> }
+        <div class="date-time-container">{output.date?.formatted ?? "Not available"}</div>
       </div>
 
       <div class="right widgets-container">
