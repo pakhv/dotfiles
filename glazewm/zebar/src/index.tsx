@@ -1,5 +1,6 @@
 /* @refresh reload */
 import './index.css';
+import './nerd-font/nerd-font.css';
 import { render } from 'solid-js/web';
 import { createStore } from 'solid-js/store';
 import * as zebar from 'zebar';
