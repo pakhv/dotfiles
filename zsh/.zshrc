@@ -8,7 +8,7 @@ export LC_ALL=C.UTF-8
 
 export EDITOR='nvim'
 export VISUAL='nvim'
-export WORKSPACE_DIR="/workspaces/rust"
+export WORKSPACE_DIR="/workspaces/playground"
 export TERM=xterm-24bits
 
 function parse_git_branch() {
@@ -33,7 +33,7 @@ alias ggo="git log --graph --oneline"
 alias ggs="git log --graph --shortstat"
 alias gs="git status"
 
-alias la="ls -a"
+alias la="exa -lah --icons --no-permissions"
 . "$HOME/.cargo/env"
 
 alias vim="nvim"
