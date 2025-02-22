@@ -140,5 +140,6 @@ require('lazy').setup({
   },
   'ThePrimeagen/harpoon',
   'tpope/vim-surround',
-  'RRethy/vim-illuminate'
+  'RRethy/vim-illuminate',
+  { "nvim-neotest/nvim-nio" }
 }, {})
