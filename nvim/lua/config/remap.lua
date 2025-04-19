@@ -11,8 +11,10 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+vim.keymap.set('n', '[d', function() vim.diagnostic.jump { count = -1, float = false } end,
+  { desc = 'Go to previous diagnostic message' })
+vim.keymap.set('n', ']d', function() vim.diagnostic.jump { count = 1, float = false } end,
+  { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>td', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, { desc = 'Open diagnostics list' })
 
@@ -32,6 +34,5 @@ vim.keymap.set("v", ">", ">gv", opts)
 vim.keymap.set("v", "p", '"_dP', opts)
 
 -- Quickfix list
-vim.keymap.set('n', '<leader>r', vim.lsp.buf.references, { desc = 'add lsp references to quickfix list' })
 vim.keymap.set('n', '[q', ':cprev<cr>', { desc = 'go to previous quickfix list entry' })
 vim.keymap.set('n', ']q', ':cnext<cr>', { desc = 'go to next quickfix list entry' })

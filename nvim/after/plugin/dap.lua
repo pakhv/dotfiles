@@ -88,25 +88,3 @@ dapui.setup {
 vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
 vim.keymap.set('n', '<F8>', function() dapui.toggle({ reset = true }) end, { desc = 'Debug: See last session result.' })
 vim.keymap.set('n', '<leader>de', dapui.eval, { desc = 'Debug: Eval expression' })
-
---dap.listeners.after.event_initialized['dapui_config'] = dapui.open
---dap.listeners.before.event_terminated['dapui_config'] = dapui.close
---dap.listeners.before.event_exited['dapui_config'] = dapui.close
-
-local function get_launch_json_path()
-  local default_path = vim.fn.getcwd() .. '/'
-  local json_dir = vim.fn.input({ prompt = 'Enter launch.json directory: ', default = default_path })
-
-  if json_dir.match('.+/$', 1) ~= nil then
-    json_dir = json_dir.sub(1, json_dir.len - 1)
-  end
-
-  json_dir = json_dir .. '/launch.json'
-
-  return json_dir
-end
-
-vim.api.nvim_create_user_command("DapAddCSharpLaunchJsonConfiguration", function()
-  local json_dir = get_launch_json_path()
-  require('dap.ext.vscode').load_launchjs(json_dir, { coreclr = { 'cs' } })
-end, {})
