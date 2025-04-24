@@ -47,6 +47,9 @@ alias tmux-ls="tmux list-sessions"
 alias c="clear"
 alias k="kubectl"
 
+alias dr="dotnet run"
+alias db="dotnet build"
+
 fpath=( ~/.local/scripts $fpath )
 autoload fcd
 autoload ffcd

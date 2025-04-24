@@ -91,4 +91,5 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 
 vim.diagnostic.config {
   float = { border = border },
+  virtual_text = true,
 }
