@@ -1,8 +1,5 @@
--- [[ Basic Keymaps ]]
 local opts = { noremap = true, silent = true }
 
--- Keymaps for better default experience
--- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', opts)
 vim.keymap.set('i', 'jk', '<ESC>')
 
