@@ -1,7 +1,6 @@
 require("config.set")
 require("config.remap")
 require("config.lazy")
-require("config.background")
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
