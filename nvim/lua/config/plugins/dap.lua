@@ -19,12 +19,6 @@ return {
             processId = function()
               return vim.fn.input({ prompt = 'Enter Process Id: ' })
             end
-          },
-          {
-            type = "coreclr",
-            name = "Launch Docflow",
-            request = "launch",
-            program = "/workspaces/dev-environment/backends/api-docflow/src/Docflow.API/bin/Debug/net8.0/Docflow.API.dll"
           }
         }
 
