@@ -9,6 +9,7 @@ return {
         { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
 
         'folke/neodev.nvim',
+        'saghen/blink.cmp',
       },
       config = function()
         local omnisharp_extended = require('omnisharp_extended')
@@ -68,7 +69,8 @@ return {
         require('neodev').setup()
 
         local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+        capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities({}, false))
+        --capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
         local mason_lspconfig = require 'mason-lspconfig'
 

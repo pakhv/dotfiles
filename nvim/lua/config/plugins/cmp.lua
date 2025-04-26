@@ -7,6 +7,7 @@ return {
       'hrsh7th/cmp-nvim-lsp',
       'rafamadriz/friendly-snippets',
     },
+    enabled = false,
     config = function()
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
