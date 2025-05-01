@@ -4,10 +4,24 @@ return {
     enabled = true,
 
     version = '1.*',
+    dependencies = {
+      'L3MON4D3/LuaSnip',
+      version = 'v2.*',
+      build = 'make install_jsregexp',
+      dependencies = {
+        {
+          'rafamadriz/friendly-snippets',
+          config = function()
+            require('luasnip.loaders.from_vscode').lazy_load()
+          end,
+        },
+      },
+    },
 
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
+      snippets = { preset = 'luasnip' },
       keymap = {
         preset = 'default',
         ['<C-o>'] = { 'show', 'show_documentation', 'hide_documentation' },
@@ -32,6 +46,6 @@ return {
       },
 
       fuzzy = { implementation = 'lua' },
-    },
+    }
   }
 }
