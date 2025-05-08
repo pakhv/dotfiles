@@ -9,7 +9,6 @@ return {
 
         { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
 
-        'folke/neodev.nvim',
         'saghen/blink.cmp',
       },
       config = function()
@@ -69,8 +68,6 @@ return {
           }
         }
 
-        require('neodev').setup()
-
         local capabilities = require('blink.cmp').get_lsp_capabilities({}, false)
 
         local ensure_installed = vim.tbl_keys(servers or {})
@@ -83,6 +80,7 @@ return {
 
         mason_lspconfig.setup {
           ensure_installed = {},
+          automatic_installation = false,
           automatic_enable = true,
           handlers = {
             function(server_name)
@@ -110,5 +108,14 @@ return {
       end
     },
     'Hoffs/omnisharp-extended-lsp.nvim',
+    {
+      'folke/lazydev.nvim',
+      ft = 'lua',
+      opts = {
+        library = {
+          { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+        },
+      },
+    },
   }
 }
