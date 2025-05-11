@@ -9,6 +9,9 @@ export LC_ALL=C.UTF-8
 export EDITOR='nvim'
 export VISUAL='nvim'
 export WORKSPACE_DIR="/workspaces/playground"
+
+export EDITOR='nvim'
+export VISUAL='nvim'
 export TERM=xterm-24bits
 
 function parse_git_branch() {
@@ -27,12 +30,14 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # autocompelete
 autoload -Uz compinit && compinit
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 
 # aliases
 alias ggo="git log --graph --oneline"
 alias ggs="git log --graph --shortstat"
 alias gs="git status"
 
+alias ls="ls --color=auto"
 alias la="exa -lah --icons --no-permissions"
 . "$HOME/.cargo/env"
 
