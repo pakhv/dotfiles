@@ -113,9 +113,6 @@ workspaces:
   - name: '1'
     bind_to_monitor: 0
     keep_alive: true
-  - name: '5'
-    bind_to_monitor: 1
-    keep_alive: true
   - name: '2'
     bind_to_monitor: 0
     keep_alive: true
@@ -125,6 +122,9 @@ workspaces:
   - name: '4'
     bind_to_monitor: 0
     keep_alive: true
+  - name: '5'
+    bind_to_monitor: 1
+    keep_alive: true 
   - name: '6'
   - name: '7'
   - name: '8'
@@ -285,14 +285,14 @@ keybindings:
   # Change focus to a workspace defined in `workspaces` config.
   - commands: ['focus --workspace 1']
     bindings: ['alt+1']
-  - commands: ['focus --workspace 5']
-    bindings: ['alt+5']
   - commands: ['focus --workspace 2']
     bindings: ['alt+2']
   - commands: ['focus --workspace 3']
     bindings: ['alt+3']
   - commands: ['focus --workspace 4']
     bindings: ['alt+4']
+  - commands: ['focus --workspace 5']
+    bindings: ['alt+5'] 
   - commands: ['focus --workspace 6']
     bindings: ['alt+6']
   - commands: ['focus --workspace 7']
