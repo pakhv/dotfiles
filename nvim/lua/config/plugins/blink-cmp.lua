@@ -39,10 +39,18 @@ return {
           auto_show_delay_ms = 500,
           window = { border = 'rounded' }
         },
+        accept = { auto_brackets = { enabled = false }, },
       },
 
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
+        providers = {
+          snippets = {
+            should_show_items = function(ctx)
+              return ctx.trigger.initial_kind ~= 'trigger_character'
+            end
+          }
+        }
       },
 
       fuzzy = { implementation = 'lua' },
