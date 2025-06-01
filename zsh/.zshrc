@@ -10,6 +10,7 @@ export DOTNET_SVCUTIL_TELEMETRY_OPTOUT=1
 
 export EDITOR='nvim'
 export VISUAL='nvim'
+export MANPAGER='nvim +Man!'
 
 export TERM=xterm-24bits
 
