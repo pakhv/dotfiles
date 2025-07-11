@@ -126,6 +126,9 @@ workspaces:
     bind_to_monitor: 1
     keep_alive: true 
   - name: '6'
+    bind_to_monitor: 1
+    keep_alive: false 
+  - name: '6'
   - name: '7'
   - name: '8'
   - name: '9'
@@ -140,9 +143,15 @@ window_rules:
   - commands: ["move --workspace 3"]
     match:
       - window_process: { regex: "Code|devenv" }
+  - commands: ["move --workspace 4"]
+    match:
+      - window_process: { regex: "Ssms" }
   - commands: ["move --workspace 5"]
     match:
-      - window_process: { regex: "slack|notepad++" }
+      - window_process: { regex: "slack" }
+  - commands: ["move --workspace 6"]
+    match:
+      - window_process: { regex: "notepad++" }
       
   - commands: ['ignore']
     match:
