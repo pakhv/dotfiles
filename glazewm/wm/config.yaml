@@ -139,7 +139,7 @@ window_rules:
       - window_process: { regex: "msedge|brave|chrome" }
   - commands: ["move --workspace 2"]
     match:
-      - window_process: { regex: "warp" }
+      - window_process: { regex: "warp|krita" }
   - commands: ["move --workspace 3"]
     match:
       - window_process: { regex: "Code|devenv" }
