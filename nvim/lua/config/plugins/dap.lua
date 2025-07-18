@@ -7,7 +7,8 @@ return {
 
         dap.adapters.coreclr = {
           type = 'executable',
-          command = '/root/.local/share/nvim/mason/packages/netcoredbg/netcoredbg',
+          command =
+          '/home/vladislav/.local/share/nvim/mason/packages/netcoredbg/netcoredbg',
           args = { '--interpreter=vscode' },
         }
 

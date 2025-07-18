@@ -3,8 +3,8 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
 export ASPNETCORE_ENVIRONMENT="Development"
-export PATH="$PATH:/root/.dotnet/tools"
-export WORKSPACE_DIR="/workspaces/dev-environment"
+export PATH="$PATH:/home/vladislav/.dotnet/tools"
+export WORKSPACE_DIR="/home/vladislav/work/projects"
 export LC_ALL=C.UTF-8
 export DOTNET_SVCUTIL_TELEMETRY_OPTOUT=1
 
