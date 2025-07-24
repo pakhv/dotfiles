@@ -13,7 +13,6 @@ vim.keymap.set('n', '[d', function() vim.diagnostic.jump { count = -1, float = f
 vim.keymap.set('n', ']d', function() vim.diagnostic.jump { count = 1, float = false } end,
   { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>td', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, { desc = 'Open diagnostics list' })
 
 -- Resize with arrows
 vim.keymap.set("n", "<C-Up>", ":resize -2<CR>", opts)
@@ -29,7 +28,3 @@ vim.keymap.set("v", ">", ">gv", opts)
 
 -- Better replace
 vim.keymap.set("v", "p", '"_dP', opts)
-
--- Quickfix list
-vim.keymap.set('n', '[q', ':cprev<cr>', { desc = 'go to previous quickfix list entry' })
-vim.keymap.set('n', ']q', ':cnext<cr>', { desc = 'go to next quickfix list entry' })

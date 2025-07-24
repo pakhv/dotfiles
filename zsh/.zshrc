@@ -15,15 +15,15 @@ export MANPAGER='nvim +Man!'
 export TERM=xterm-24bits
 
 function parse_git_branch() {
-    git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/[\1]/p'
+    git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/ [\1]/p'
 }
 
-COLOR_DEF=$'%f{green}'
-COLOR_USR=$'%F{green}'
 COLOR_DIR=$'%F{blue}'
 COLOR_GIT=$'%F{red}'
+COLOR_ARROW=$'%F{204}'
 setopt PROMPT_SUBST
-export PROMPT='${COLOR_USR}%n ${COLOR_DIR}%~ ${COLOR_GIT}$(parse_git_branch)$f $ '
+
+export PROMPT='${COLOR_DIR}%~${COLOR_ARROW}$(parse_git_branch)$f $ '
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
