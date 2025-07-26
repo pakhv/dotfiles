@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 
-search_result=$(find $@ -path "./proc/*" -prune -o -path "/proc/*" -prune -o -type d | fzf)
+search_result=$(find $@ -path "*/node_modules" -prune -path "./proc/*" -prune -path "/proc/*" -prune -o -type d | fzf)
 
 if [[ -z $search_result ]]; then
     return
