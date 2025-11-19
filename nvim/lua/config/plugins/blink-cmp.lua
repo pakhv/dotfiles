@@ -27,6 +27,8 @@ return {
         ['<C-o>'] = { 'show', 'show_documentation', 'hide_documentation' },
         ['<C-k>'] = { 'snippet_forward', 'fallback' },
         ['<C-j>'] = { 'snippet_backward', 'fallback' },
+        ['<Tab>'] = {},
+        ['<S-Tab>'] = {},
       },
 
       appearance = {

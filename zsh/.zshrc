@@ -4,6 +4,8 @@ export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
 export ASPNETCORE_ENVIRONMENT="Development"
 export PATH="$PATH:/home/vladislav/.dotnet/tools"
+export DOTNET_ROOT=/usr/share/dotnet
+export PATH=$PATH:$DOTNET_ROOT
 export WORKSPACE_DIR="/home/vladislav/work/projects"
 export LC_ALL=C.UTF-8
 export DOTNET_SVCUTIL_TELEMETRY_OPTOUT=1
@@ -24,6 +26,8 @@ COLOR_ARROW=$'%F{204}'
 setopt PROMPT_SUBST
 
 export PROMPT='${COLOR_DIR}%~${COLOR_ARROW}$(parse_git_branch)$f $ '
+
+. "$HOME/.cargo/env"
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
