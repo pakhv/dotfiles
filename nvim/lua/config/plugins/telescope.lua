@@ -21,7 +21,8 @@ return {
               ['<C-d>'] = false,
             },
           },
-          layout_strategy = 'vertical'
+          layout_strategy = 'vertical',
+          layout_config = { height = 0.99, width = 0.99 },
         },
       }
 
