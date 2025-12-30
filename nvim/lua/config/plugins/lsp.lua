@@ -3,24 +3,28 @@ return {
     {
       'neovim/nvim-lspconfig',
       dependencies = {
-        { 'williamboman/mason.nvim', config = true },
+        {
+          'mason-org/mason.nvim',
+          opts = {
+            registries = {
+              "github:mason-org/mason-registry",
+              "github:Crashdummyy/mason-registry",
+            },
+          }
+        },
         'WhoIsSethDaniel/mason-tool-installer.nvim',
         'williamboman/mason-lspconfig.nvim',
 
-        { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
+        { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
         'saghen/blink.cmp',
       },
       config = function()
-        local omnisharp_extended = require('omnisharp_extended')
         local border = 'rounded'
 
         vim.api.nvim_create_autocmd('LspAttach', {
           group = vim.api.nvim_create_augroup('my-lsp-attach', { clear = true }),
           callback = function(event)
-            local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
-            local client_name = client.name
-
             local nmap = function(keys, func, desc)
               if desc then
                 desc = 'LSP: ' .. desc
@@ -32,18 +36,10 @@ return {
             nmap('<F2>', vim.lsp.buf.rename, 'Rename')
             nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
-            -- since omnisharp doesn't work as expected we extend handlers with another plugin
-            if client_name == 'omnisharp' then
-              nmap('gd', omnisharp_extended.lsp_definition, '[G]oto [D]efinition')
-              nmap('<leader>r', omnisharp_extended.lsp_references, 'Add lsp [R]eferences to quickfix list')
-              nmap('gI', omnisharp_extended.lsp_implementation, '[G]oto [I]mplementation')
-              nmap('gr', omnisharp_extended.telescope_lsp_references, '[G]oto [R]eferences')
-            else
-              nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-              nmap('<leader>r', vim.lsp.buf.references, 'Add lsp [R]eferences to quickfix list')
-              nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-              nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-            end
+            nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+            nmap('<leader>r', vim.lsp.buf.references, 'Add lsp [R]eferences to quickfix list')
+            nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+            nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 
             nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
 
@@ -61,11 +57,6 @@ return {
               telemetry = { enable = false },
             },
           },
-          omnisharp = {
-            cmd = { "dotnet", "omnisharp" },
-            enable_roslyn_analyzers = true,
-            enable_import_completion = true
-          }
         }
 
         local capabilities = require('blink.cmp').get_lsp_capabilities({}, false)
@@ -107,7 +98,6 @@ return {
         }
       end
     },
-    'Hoffs/omnisharp-extended-lsp.nvim',
     {
       'folke/lazydev.nvim',
       ft = 'lua',
@@ -117,5 +107,6 @@ return {
         },
       },
     },
+    { "seblyng/roslyn.nvim" },
   }
 }
