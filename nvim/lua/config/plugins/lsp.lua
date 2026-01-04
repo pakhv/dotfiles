@@ -13,10 +13,8 @@ return {
           }
         },
         'WhoIsSethDaniel/mason-tool-installer.nvim',
-        'williamboman/mason-lspconfig.nvim',
-
-        { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
-
+        'mason-org/mason-lspconfig.nvim',
+        { 'j-hui/fidget.nvim', opts = {} },
         'saghen/blink.cmp',
       },
       config = function()
@@ -30,21 +28,27 @@ return {
                 desc = 'LSP: ' .. desc
               end
 
-              vim.keymap.set('n', keys, func, { buffer = event.buf, desc = desc })
+              vim.keymap.set('n', keys, func,
+                { buffer = event.buf, desc = desc })
             end
 
             nmap('<F2>', vim.lsp.buf.rename, 'Rename')
             nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
             nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-            nmap('<leader>r', vim.lsp.buf.references, 'Add lsp [R]eferences to quickfix list')
+            nmap('<leader>r', vim.lsp.buf.references,
+              'Add lsp [R]eferences to quickfix list')
             nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-            nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+            nmap('gr', require('telescope.builtin').lsp_references,
+              '[G]oto [R]eferences')
 
-            nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+            nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols,
+              '[D]ocument [S]ymbols')
 
-            nmap('K', function() vim.lsp.buf.hover { border = border } end, 'Hover Documentation')
-            vim.keymap.set({ 'i' }, '<C-s>', function() vim.lsp.buf.signature_help { border = border } end,
+            nmap('K', function() vim.lsp.buf.hover { border = border } end,
+              'Hover Documentation')
+            vim.keymap.set({ 'i' }, '<C-s>',
+              function() vim.lsp.buf.signature_help { border = border } end,
               { desc = 'Signature Documentation', buffer = event.buf })
           end
         })
@@ -76,7 +80,8 @@ return {
           handlers = {
             function(server_name)
               local server = servers[server_name] or {}
-              server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+              server.capabilities = vim.tbl_deep_extend('force', {},
+                capabilities, server.capabilities or {})
 
               require('lspconfig')[server_name].setup(server)
             end
@@ -110,3 +115,4 @@ return {
     { "seblyng/roslyn.nvim" },
   }
 }
+-- vim: sw=2 et

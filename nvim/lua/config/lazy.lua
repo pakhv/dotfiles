@@ -12,9 +12,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  'tpope/vim-sleuth',
+  'NMAC427/guess-indent.nvim',
   'tpope/vim-fugitive',
-  { 'folke/which-key.nvim',  opts = {} },
+  { 'folke/which-key.nvim',   opts = {} },
   {
     'catppuccin/nvim',
     priority = 1000,
@@ -27,16 +27,29 @@ require('lazy').setup({
     end,
   },
   {
-    'nvim-lualine/lualine.nvim',
-    opts = {
-      options = {
-        icons_enabled = false,
-        theme = 'onedark',
-        component_separators = '|',
-        section_separators = '',
-      },
-    },
+    'nvim-mini/mini.statusline',
+    version = false,
+    config = function()
+      local statusline = require('mini.statusline')
+      statusline.setup()
+
+      ---@diagnostic disable-next-line: duplicate-set-field
+      statusline.section_location = function()
+        return '%2l:%-2v'
+      end
+    end
   },
+  -- {
+  --   'nvim-lualine/lualine.nvim',
+  --   opts = {
+  --     options = {
+  --       icons_enabled = false,
+  --       theme = 'onedark',
+  --       component_separators = '|',
+  --       section_separators = '',
+  --     },
+  --   },
+  -- },
   {
     'lukas-reineke/indent-blankline.nvim',
     main = "ibl",
@@ -44,8 +57,9 @@ require('lazy').setup({
       indent = { char = "╎" },
     },
   },
-  { 'numToStr/Comment.nvim', opts = {} },
   'tpope/vim-surround',
-  "nvim-neotest/nvim-nio",
+  'nvim-neotest/nvim-nio',
   { import = "config.plugins" },
 }, {})
+
+-- vim: sw=2 et

@@ -36,6 +36,11 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 autoload -Uz compinit && compinit
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 
+# edit-command-line
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+
 # aliases
 alias ggo="git log --graph --oneline"
 alias ggs="git log --graph --shortstat"
