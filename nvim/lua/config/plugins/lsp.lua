@@ -12,8 +12,6 @@ return {
             },
           }
         },
-        'WhoIsSethDaniel/mason-tool-installer.nvim',
-        'mason-org/mason-lspconfig.nvim',
         { 'j-hui/fidget.nvim', opts = {} },
         'saghen/blink.cmp',
       },
@@ -52,55 +50,6 @@ return {
               { desc = 'Signature Documentation', buffer = event.buf })
           end
         })
-
-        local servers = {
-          ts_ls = {},
-          lua_ls = {
-            Lua = {
-              workspace = { checkThirdParty = false },
-              telemetry = { enable = false },
-            },
-          },
-        }
-
-        local capabilities = require('blink.cmp').get_lsp_capabilities({}, false)
-
-        local ensure_installed = vim.tbl_keys(servers or {})
-        vim.list_extend(ensure_installed, {
-          'stylua', -- Used to format Lua code
-        })
-        require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
-        local mason_lspconfig = require('mason-lspconfig')
-
-        mason_lspconfig.setup {
-          ensure_installed = {},
-          automatic_installation = false,
-          automatic_enable = true,
-          handlers = {
-            function(server_name)
-              local server = servers[server_name] or {}
-              server.capabilities = vim.tbl_deep_extend('force', {},
-                capabilities, server.capabilities or {})
-
-              require('lspconfig')[server_name].setup(server)
-            end
-          }
-        }
-
-        local format_group = vim.api.nvim_create_augroup('FormatOnSave', { clear = true })
-        vim.api.nvim_create_autocmd('BufWritePre', {
-          callback = function()
-            vim.lsp.buf.format()
-          end,
-          group = format_group,
-          pattern = '*',
-        })
-
-        vim.diagnostic.config {
-          float = { border = border },
-          virtual_text = true,
-        }
       end
     },
     {
@@ -115,4 +64,3 @@ return {
     { "seblyng/roslyn.nvim" },
   }
 }
--- vim: sw=2 et

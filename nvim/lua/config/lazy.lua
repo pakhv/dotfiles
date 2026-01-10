@@ -12,7 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  'NMAC427/guess-indent.nvim',
+  'tpope/vim-sleuth',
   'tpope/vim-fugitive',
   { 'folke/which-key.nvim',   opts = {} },
   {
@@ -39,17 +39,6 @@ require('lazy').setup({
       end
     end
   },
-  -- {
-  --   'nvim-lualine/lualine.nvim',
-  --   opts = {
-  --     options = {
-  --       icons_enabled = false,
-  --       theme = 'onedark',
-  --       component_separators = '|',
-  --       section_separators = '',
-  --     },
-  --   },
-  -- },
   {
     'lukas-reineke/indent-blankline.nvim',
     main = "ibl",
