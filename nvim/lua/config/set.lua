@@ -1,5 +1,6 @@
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
+vim.opt.winborder = "rounded"
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '

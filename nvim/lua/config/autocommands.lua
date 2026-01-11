@@ -26,7 +26,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.keymap.set('n', keys, func,
         { buffer = event.buf, desc = desc })
     end
-    local border = 'rounded'
 
     nmap('<F2>', vim.lsp.buf.rename, 'Rename')
     nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
@@ -41,10 +40,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols,
       '[D]ocument [S]ymbols')
 
-    nmap('K', function() vim.lsp.buf.hover { border = border } end,
+    nmap('K', function() vim.lsp.buf.hover {} end,
       'Hover Documentation')
     vim.keymap.set({ 'i' }, '<C-s>',
-      function() vim.lsp.buf.signature_help { border = border } end,
+      function() vim.lsp.buf.signature_help {} end,
       { desc = 'Signature Documentation', buffer = event.buf })
   end
 })
