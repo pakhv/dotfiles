@@ -47,3 +47,21 @@ vim.api.nvim_create_autocmd('LspAttach', {
       { desc = 'Signature Documentation', buffer = event.buf })
   end
 })
+
+local hooks = function(ev)
+  local name, kind = ev.data.spec.name, ev.data.kind
+
+  if name == 'LuaSnip' and (kind == 'install') then
+    vim.system({ 'make', 'install_jsregexp' }, { cwd = ev.data.path })
+  end
+
+  if name == 'telescope-fzf-native.nvim' and (kind == 'install') then
+    vim.system({ 'make' }, { cwd = ev.data.path })
+  end
+
+  if name == 'nvim-treesitter/nvim-treesitter' and (kind == 'install' or kind == 'update') then
+    vim.api.nvim_exec_autocmds('User', { pattern = 'TSUpdate' })
+  end
+end
+
+vim.api.nvim_create_autocmd('PackChanged', { callback = hooks })
