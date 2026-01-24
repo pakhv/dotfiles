@@ -4,7 +4,8 @@ vim.pack.add({
   { src = 'https://github.com/nvim-mini/mini.statusline' },
   { src = 'https://github.com/lukas-reineke/indent-blankline.nvim' },
   { src = 'https://github.com/tpope/vim-surround' },
-  { src = 'https://github.com/nvim-neotest/nvim-nio' }
+  { src = 'https://github.com/nvim-neotest/nvim-nio' },
+  { src = 'https://github.com/folke/which-key.nvim' },
 })
 
 require('catppuccin').setup({
