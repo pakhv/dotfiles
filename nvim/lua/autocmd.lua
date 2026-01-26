@@ -1,6 +1,6 @@
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
-    vim.highlight.on_yank()
+    vim.hl.on_yank()
   end,
   group = vim.api.nvim_create_augroup('YankHighlight', { clear = true }),
   pattern = '*',
@@ -47,3 +47,21 @@ vim.api.nvim_create_autocmd('LspAttach', {
       { desc = 'Signature Documentation', buffer = event.buf })
   end
 })
+
+local pack_hooks = function(ev)
+  local name, kind = ev.data.spec.name, ev.data.kind
+
+  if name == 'LuaSnip' and (kind == 'install' or kind == 'update') then
+    vim.system({ 'make', 'install_jsregexp' }, { cwd = ev.data.path })
+  end
+
+  if name == 'telescope-fzf-native.nvim' and (kind == 'install' or kind == 'update') then
+    vim.system({ 'make' }, { cwd = ev.data.path })
+  end
+
+  if name == 'nvim-treesitter/nvim-treesitter' and (kind == 'install' or kind == 'update') then
+    vim.api.nvim_exec_autocmds('User', { pattern = 'TSUpdate' })
+  end
+end
+
+vim.api.nvim_create_autocmd('PackChanged', { callback = pack_hooks })
