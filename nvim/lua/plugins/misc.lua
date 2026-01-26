@@ -28,10 +28,11 @@ require('ibl').setup({
 })
 
 vim.pack.add({
-  { src = 'https://github.com/echasnovski/mini.icons' },
+  { src = 'https://github.com/nvim-mini/mini.icons' },
   { src = 'https://github.com/stevearc/oil.nvim' },
 })
 
+require('mini.icons').setup()
 require('oil').setup({
   view_options = {
     show_hidden = true
