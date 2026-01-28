@@ -9,7 +9,6 @@ export PATH=$PATH:$DOTNET_ROOT
 export WORKSPACE_DIR="/home/vladislav/work/projects"
 export LC_ALL=C.UTF-8
 export DOTNET_SVCUTIL_TELEMETRY_OPTOUT=1
-export DOTNET_USE_POLLING_FILE_WATCHER=true
 
 export EDITOR='nvim'
 export VISUAL='nvim'
