@@ -2,7 +2,7 @@
 
 function tmux-news-def()
 {
-    search_result=$(find $@ -path "*/node_modules" -prune -path "./proc/*" -prune -path "/proc/*" -prune -o -type d | sort -u | fzf)
+    search_result=$(find $@ -path "*/node_modules" -prune -path "./proc/*" -prune -path "/proc/*" -prune -o -type d | awk '!x[$0]++' | fzf --tiebreak=begin)
 
     if [[ -z $search_result ]]; then
         return
