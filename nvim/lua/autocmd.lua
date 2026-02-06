@@ -34,17 +34,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     nmap('<leader>r', vim.lsp.buf.references,
       'Add lsp [R]eferences to quickfix list')
     nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-    nmap('gr', require('telescope.builtin').lsp_references,
-      '[G]oto [R]eferences')
-
-    nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols,
-      '[D]ocument [S]ymbols')
-
-    nmap('K', function() vim.lsp.buf.hover {} end,
-      'Hover Documentation')
-    vim.keymap.set({ 'i' }, '<C-s>',
-      function() vim.lsp.buf.signature_help {} end,
-      { desc = 'Signature Documentation', buffer = event.buf })
   end
 })
 

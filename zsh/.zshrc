@@ -64,5 +64,5 @@ fpath=( ~/.local/scripts $fpath )
 autoload fcd
 autoload ffcd
 
-alias fd="fcd $HOME"
+alias fcd="fcd $HOME"
 alias tmux-news="zsh ~/.local/scripts/tmux-sessions.sh $WORKSPACE_DIR $HOME"
