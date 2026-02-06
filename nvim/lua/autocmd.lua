@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         { buffer = event.buf, desc = desc })
     end
 
-    nmap('<F2>', vim.lsp.buf.rename, 'Rename')
+    nmap('<F2>', vim.lsp.buf.rename, '[R]ename')
     nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
     nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
