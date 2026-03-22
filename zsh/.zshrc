@@ -47,7 +47,7 @@ alias ggs="git log --graph --shortstat"
 alias gs="git status"
 
 alias ls="ls --color=auto"
-alias la="exa -lah --icons --no-permissions"
+alias la="eza -lah --icons --no-permissions"
 
 alias vim="nvim"
 alias tmux="tmux -u"
