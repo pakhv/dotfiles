@@ -47,7 +47,7 @@ fi
 
 # nvim config
 echo 'symlink for nvim config'
-ln -sf "${home_path}dotfiles/nvim" "${home_path}.config/nvim"
+ln -sf "${home_path}dotfiles/nvim" "${home_path}.config"
 
 # alacritty
 mkdir -p "${home_path}.config/alacritty"
