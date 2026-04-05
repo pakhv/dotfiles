@@ -5,6 +5,7 @@ vim.pack.add({
   { src = 'https://github.com/stevearc/oil.nvim' },
   -- { src = 'https://github.com/RRethy/vim-illuminate' },
 })
+vim.cmd.packadd('nvim.undotree');
 
 require('catppuccin').setup({
   transparent_background = true,

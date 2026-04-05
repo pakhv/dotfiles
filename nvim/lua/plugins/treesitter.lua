@@ -1,13 +1,19 @@
 vim.pack.add({
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = "master" },
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = "main" },
 })
 
-require('nvim-treesitter.configs').setup(
-  {
-    ensure_installed = { 'lua', 'c_sharp', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'rust' },
+-- require('nvim-treesitter').install { 'lua', 'c_sharp', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim' }
 
-    auto_install = false,
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function(args)
+    local buf, filetype = args.buf, args.match
 
-    highlight = { enable = true, additional_vim_regex_highlighting = false },
-    indent = { enable = true },
-  })
+    local language = vim.treesitter.language.get_lang(filetype)
+    if not language then return end
+
+    if not vim.treesitter.language.add(language) then return end
+    vim.treesitter.start(buf, language)
+
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
+})

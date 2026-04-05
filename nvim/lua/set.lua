@@ -15,7 +15,11 @@ opt.backup = false
 opt.hlsearch = false
 
 opt.mouse = 'a'
-opt.clipboard = 'unnamedplus'
+
+vim.opt.clipboard = ""
+vim.schedule(function()
+  vim.opt.clipboard = "unnamedplus"
+end)
 
 opt.breakindent = true
 
