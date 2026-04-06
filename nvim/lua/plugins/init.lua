@@ -1,8 +1,0 @@
-require 'plugins.blink-cmp'
-require 'plugins.lsp'
-require 'plugins.misc'
-require 'plugins.harpoon'
-require 'plugins.git'
-require 'plugins.treesitter'
-require 'plugins.dap'
-require 'plugins.pick'

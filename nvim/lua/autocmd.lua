@@ -44,12 +44,8 @@ local pack_hooks = function(ev)
     vim.system({ 'make', 'install_jsregexp' }, { cwd = ev.data.path })
   end
 
-  if name == 'telescope-fzf-native.nvim' and (kind == 'install' or kind == 'update') then
-    vim.system({ 'make' }, { cwd = ev.data.path })
-  end
-
   if name == 'nvim-treesitter/nvim-treesitter' and (kind == 'install' or kind == 'update') then
-    vim.api.nvim_exec_autocmds('User', { pattern = 'TSUpdate' })
+    vim.cmd('TSUpdate')
   end
 end
 

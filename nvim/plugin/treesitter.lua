@@ -14,6 +14,6 @@ vim.api.nvim_create_autocmd('FileType', {
     if not vim.treesitter.language.add(language) then return end
     vim.treesitter.start(buf, language)
 
-    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end,
 })
