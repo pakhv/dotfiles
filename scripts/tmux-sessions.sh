@@ -1,6 +1,9 @@
 #!/usr/bin/sh
 
-search_result=$(find $@ -path "*/node_modules" -prune -path "./proc/*" -prune -path "/proc/*" -prune -o -type d | awk '!x[$0]++' | sort | fzf --tiebreak=begin)
+search_result=$(find "$@" -path "*/node_modules" -prune \
+                         -o -path "./proc/*" -prune \
+                         -o -path "/proc/*" -prune \
+                         -o -type d -print 2>/dev/null | fzf --tiebreak=begin)
 
 if [[ -z $search_result ]]; then
     return
