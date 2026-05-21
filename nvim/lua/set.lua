@@ -16,10 +16,24 @@ opt.hlsearch = false
 
 opt.mouse = 'a'
 
-vim.opt.clipboard = ""
-vim.schedule(function()
-  vim.opt.clipboard = "unnamedplus"
-end)
+opt.inccommand = "split"
+opt.confirm = true;
+
+if vim.fn.has("wsl") == 1 then
+  vim.g.clipboard = {
+    name = 'win32yank-wsl',
+    copy = {
+      ['+'] = 'win32yank.exe -i --crlf',
+      ['*'] = 'win32yank.exe -i --crlf',
+    },
+    paste = {
+      ['+'] = 'win32yank.exe -o --lf',
+      ['*'] = 'win32yank.exe -o --lf',
+    },
+    cache_enabled = 0,
+  }
+end
+vim.opt.clipboard = "unnamedplus"
 
 opt.breakindent = true
 
