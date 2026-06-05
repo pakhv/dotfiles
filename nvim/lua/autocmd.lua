@@ -1,6 +1,18 @@
+local function on_list(what)
+  vim.fn.setqflist({}, ' ', what)
+  if
+      #what.items == 1
+      and what.context.method ~= 'textDocument/references'
+  then
+    vim.cmd('cfirst')
+  else
+    vim.cmd('botright copen')
+  end
+end
+
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
-    vim.hl.on_yank()
+    vim.hl.hl_op()
   end,
   group = vim.api.nvim_create_augroup('YankHighlight', { clear = true }),
   pattern = '*',
@@ -32,7 +44,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
     nmap('<leader>r', vim.lsp.buf.references,
       'Add lsp [R]eferences to quickfix list')
-    nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+    nmap('gI', function() vim.lsp.buf.implementation({ on_list = on_list }) end, '[G]oto [I]mplementation')
 
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     if client == nil then
