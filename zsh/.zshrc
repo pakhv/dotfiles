@@ -68,3 +68,4 @@ autoload ffcd
 
 alias fcd="fcd $HOME"
 alias tmux-news="zsh ~/.local/scripts/tmux-sessions.sh $WORKSPACE_DIR $HOME"
+alias vpn-fix="sudo /usr/sbin/ifconfig eth0 mtu 1350 up"
