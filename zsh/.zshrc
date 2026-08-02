@@ -56,6 +56,8 @@ alias tmux="tmux -u"
 alias tmux-ks="tmux kill-session -t"
 alias tmux-ls="tmux list-sessions"
 
+alias herdr-stop="herdr server stop"
+
 alias c="clear"
 alias k="kubectl"
 
