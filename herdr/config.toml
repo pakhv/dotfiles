@@ -1,0 +1,13 @@
+onboarding = false
+
+[ui]
+prompt_new_tab_name = false
+sidebar_start_collapsed = true
+
+[ui.sound]
+enabled = false
+
+[keys]
+prefix = "ctrl+a"
+next_workspace = "prefix+ctrl+n"
+previous_workspace = "prefix+ctrl+p"
