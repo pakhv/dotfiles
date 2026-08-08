@@ -11,3 +11,5 @@ enabled = false
 prefix = "ctrl+a"
 next_workspace = "prefix+ctrl+n"
 previous_workspace = "prefix+ctrl+p"
+split_vertical = "prefix+%"
+split_horizontal = "prefix+\""
