@@ -28,4 +28,6 @@ vim.lsp.config("roslyn", {
   }
 })
 
-vim.keymap.set('n', '<leader>f', vim.lsp.buf.format)
+vim.keymap.set('n', '<leader>d', function()
+  vim.diagnostic.setqflist({ severity = { vim.diagnostic.severity.ERROR, vim.diagnostic.severity.WARN } })
+end)

@@ -1,4 +1,4 @@
-local opts = { noremap = true, silent = true }
+local opts = { silent = true }
 
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', opts)
 vim.keymap.set('i', 'jk', '<ESC>')
