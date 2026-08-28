@@ -19,3 +19,7 @@ vim.keymap.set("v", ">", ">gv", opts)
 
 -- Better replace
 vim.keymap.set("v", "p", '"_dP', opts)
+
+vim.keymap.set("n", "<C-t>", ':ToggleTerm<cr>', opts)
+vim.keymap.set("t", "<C-t>", '<C-\\><C-n>:ToggleTerm<cr>', opts)
+vim.keymap.set("t", "<ESC>", '<C-\\><C-n>', opts)

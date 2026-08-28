@@ -43,7 +43,5 @@ require('gitsigns').setup {
   on_attach                    = function(bufnr)
     vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk,
       { buffer = bufnr, desc = '[P]review [H]unk' })
-    vim.keymap.set('n', '<leader>tb', require('gitsigns').toggle_current_line_blame,
-      { buffer = bufnr, desc = '[T]oggle current line [B]lame' })
   end,
 }

@@ -77,3 +77,33 @@ vim.api.nvim_create_autocmd('PackChanged', {
     end
   end
 })
+
+vim.api.nvim_create_user_command('ToggleTerm', function(_)
+  local opened_term_buf = nil
+  local new_buf_created = false
+
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_is_loaded(buf) and vim.api.nvim_get_option_value("buftype", { buf = buf }) == "terminal" then
+      opened_term_buf = buf
+      break
+    end
+  end
+
+  if opened_term_buf ~= nil and #vim.fn.win_findbuf(opened_term_buf) > 0 then
+    vim.api.nvim_win_close(vim.fn.win_findbuf(opened_term_buf)[1], false)
+    return
+  end
+
+  if opened_term_buf == nil then
+    opened_term_buf = vim.api.nvim_create_buf(true, false)
+    new_buf_created = true
+  end
+
+  vim.api.nvim_open_win(opened_term_buf, true, { split = "below", height = 15 })
+
+  if new_buf_created then
+    vim.api.nvim_command(':terminal')
+  end
+
+  vim.api.nvim_command(':norm i')
+end)
