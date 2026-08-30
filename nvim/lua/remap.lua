@@ -23,3 +23,6 @@ vim.keymap.set("v", "p", '"_dP', opts)
 vim.keymap.set("n", "<C-t>", ':ToggleTerm<cr>', opts)
 vim.keymap.set("t", "<C-t>", '<C-\\><C-n>:ToggleTerm<cr>', opts)
 vim.keymap.set("t", "<ESC>", '<C-\\><C-n>', opts)
+
+vim.keymap.set('n', '<leader>gf', ':find ', opts)
+vim.keymap.set("n", '<leader>sg', function() vim.api.nvim_feedkeys(":Rg ", "n", false) end, opts)

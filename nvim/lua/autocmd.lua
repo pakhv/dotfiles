@@ -107,3 +107,34 @@ vim.api.nvim_create_user_command('ToggleTerm', function(_)
 
   vim.api.nvim_command(':norm i')
 end)
+
+vim.api.nvim_create_autocmd('CmdlineChanged', {
+  pattern = ":",
+  callback = function()
+    if string.sub(vim.fn.getcmdline(), 1, 5) == 'find ' then
+      vim.fn.wildtrigger()
+    end
+  end
+})
+
+vim.api.nvim_create_user_command('Rg', function(opts)
+  local pattern = opts.args
+  if pattern == "" then
+    return
+  end
+
+  local cmd = string.format("rg --vimgrep --smart-case %q", pattern)
+
+  local output = vim.fn.systemlist(cmd)
+
+  vim.fn.setqflist({}, "r", { title = "Ripgrep: " .. pattern, lines = output })
+
+  local qf_list = vim.fn.getqflist()
+  local match_count = #qf_list
+
+  if match_count > 1 then
+    vim.cmd("copen")
+  elseif match_count == 1 then
+    vim.cmd("cfirst")
+  end
+end, { nargs = 1 })
