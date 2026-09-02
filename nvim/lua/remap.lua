@@ -26,3 +26,4 @@ vim.keymap.set("t", "<ESC>", '<C-\\><C-n>', opts)
 
 vim.keymap.set('n', '<leader>gf', ':find ', opts)
 vim.keymap.set("n", '<leader>sg', function() vim.api.nvim_feedkeys(":Rg ", "n", false) end, opts)
+vim.keymap.set("n", '<leader><leader>', function() vim.api.nvim_feedkeys(":buffer ", "n", false) end, opts)

@@ -18,14 +18,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
-vim.api.nvim_create_autocmd('BufWritePre', {
-  callback = function()
-    vim.lsp.buf.format()
-  end,
-  group = vim.api.nvim_create_augroup('FormatOnSave', { clear = true }),
-  pattern = '*',
-})
-
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('my-lsp-attach', { clear = true }),
   callback = function(ev)
@@ -61,16 +53,23 @@ vim.api.nvim_create_autocmd('LspAttach', {
         callback = vim.lsp.buf.clear_references,
       })
     end
+
+    if not client:supports_method('textDocument/willSaveWaitUntil')
+        and client:supports_method('textDocument/formatting') then
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        group = vim.api.nvim_create_augroup('my-lsp-attach', { clear = false }),
+        buffer = ev.buf,
+        callback = function()
+          vim.lsp.buf.format({ bufnr = ev.buf, id = client.id, timeout_ms = 1000 })
+        end,
+      })
+    end
   end
 })
 
 vim.api.nvim_create_autocmd('PackChanged', {
   callback = function(ev)
     local name, kind = ev.data.spec.name, ev.data.kind
-
-    if name == 'LuaSnip' and (kind == 'install' or kind == 'update') then
-      vim.system({ 'make', 'install_jsregexp' }, { cwd = ev.data.path })
-    end
 
     if name == 'nvim-treesitter/nvim-treesitter' and (kind == 'install' or kind == 'update') then
       vim.cmd('TSUpdate')
@@ -111,8 +110,13 @@ end)
 vim.api.nvim_create_autocmd('CmdlineChanged', {
   pattern = ":",
   callback = function()
-    if string.sub(vim.fn.getcmdline(), 1, 5) == 'find ' then
-      vim.fn.wildtrigger()
+    local trigger_commands = { 'find ', 'buffer ' }
+
+    for _, c in ipairs(trigger_commands) do
+      if string.sub(vim.fn.getcmdline(), 1, string.len(c)) == c then
+        vim.fn.wildtrigger()
+        return;
+      end
     end
   end
 })
