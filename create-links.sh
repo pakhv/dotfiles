@@ -39,14 +39,6 @@ echo 'symlink for i3'
 mkdir -p "${home_path}/.config/i3"
 ln -sf "${home_path}/dotfiles/i3/config" "${home_path}/.config/i3/config"
 
-# tmux catppuccin
-mkdir -p "${home_path}/tmux/catppuccin"
-
-if [[ ! -d "${home_path}/tmux/catppuccin/tmux" ]]; then
-    echo 'cloning tmux catppuccin theme'
-    git clone https://github.com/catppuccin/tmux.git "${home_path}/tmux/catppuccin/tmux"
-fi
-
 # nvim config
 echo 'symlink for nvim config'
 ln -sf "${home_path}/dotfiles/nvim" "${home_path}/.config"
@@ -55,3 +47,8 @@ ln -sf "${home_path}/dotfiles/nvim" "${home_path}/.config"
 mkdir -p "${home_path}/.config/alacritty"
 echo 'symlink for alacritty'
 ln -sf "${home_path}/dotfiles/alacritty/alacritty.toml" "${home_path}/.config/alacritty/alacritty.toml"
+
+# herdr config
+mkdir -p "${home_path}/.config/herdr"
+echo 'symlink for herdr config'
+ln -sf "${home_path}/dotfiles/herdr/config.toml" "${home_path}/.config/herdr/config.toml"
